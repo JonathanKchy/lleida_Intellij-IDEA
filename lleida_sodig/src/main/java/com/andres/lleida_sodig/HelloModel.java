@@ -10,17 +10,21 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HelloModel {
 
+    public void reporteFecha(Date date){
+
+    }
     public int numero(){
         return 1;
     }
     static String mail_id, mail_date,fecha_andre, mail_type, file_doc_model, file_uid, unidades_certificadas, mail_from, mail_to,direccion_CC="correo@certificado.lleida.net", gstatus, gstatus_aux, mail_subj, add_id, add_displaydate, add_uid;
-    public void obtenerExcel() throws MalformedURLException, IOException {
+    public void obtenerExcel() {
         System.out.println("Espere");
         System.out.println();
         int contador = 0, numeroCelda = 0;

@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.Date;
 
 public class HelloController {
     private HelloModel modelo=new HelloModel();
@@ -21,6 +22,8 @@ public class HelloController {
         welcomeText.setText("Hola mi pez :v");
         //modelo.numero();
         modelo.obtenerExcel();
+        Date date = null;
+        modelo.reporteFecha(date);
     }
 
     public void onExcelClickButton(ActionEvent actionEvent) {

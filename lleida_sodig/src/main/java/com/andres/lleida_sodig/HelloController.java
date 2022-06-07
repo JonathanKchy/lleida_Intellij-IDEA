@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class HelloController {
+    private HelloModel modelo=new HelloModel();
     public TextField txtUsuario;
     public TextField txtClave;
     public Button btnExcel;

@@ -60,31 +60,38 @@ public class HelloModel {
         }
     return  bool;
     }
-    public void reportePorFechas(String fechaInicial,String fechaFinal){
 
+
+    //metodo para obtener reporte por rango de fechas
+    public String reportePorFechas(String fechaInicial,String fechaFinal){
+    String fecha=null;
        try
         {
-        URL url = new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user=sodigsa@ec&password=TIiANcmymJ");
-        //URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user=sodigsa@ec&password=TIiANcmymJ&mail_date_min=20220501070000&mail_date_max=20220601070000");
-        //URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=download_pdf&user=sodigsa@ec&password=TIiANcmymJ&file_id=75524951");
-
+        URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user="+user+"&password="+password+"&mail_date_min="+fechaInicial+"070000&mail_date_max="+fechaFinal+"070000");
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.connect();
-
         int responseCod = conn.getResponseCode();
         if (responseCod != 200) {
-
+            throw new RuntimeException("ocurrio un error: "+responseCod);
         } else {
-
+            fecha= "https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user="+user+"&password="+password+"&mail_date_min="+fechaInicial+"070000&mail_date_max="+fechaFinal+"070000";
         }
     }catch(Exception e){
+        System.out.println("Error: "+ e);
+    }
 
+        return fecha;
     }
-    }
+
+
+
     public int numero(){
         return 1;
     }
+
+
+
 
     public void obtenerExcel() {
         System.out.println("Espere");

@@ -3,39 +3,50 @@ package com.andres.lleida_sodig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class HelloController {
+    @FXML
+    public Button btnConexion;
+    public Button btnConsultar;
+    public Label labelMensaje;
+    public DatePicker dateFechaInicial;
+    public DatePicker dateFechaFin;
     private HelloModel modelo=new HelloModel();
     public TextField txtUsuario;
     public TextField txtClave;
     public Button btnExcel;
-    @FXML
-    private Label welcomeText;
+
+
 
     @FXML
-    protected void onHelloButtonClick() throws IOException {
-        welcomeText.setText("Hola mi pez :v");
-        //modelo.numero();
-        modelo.obtenerExcel();
-        String fechaInicial=null,fechaFinal=null;
-        modelo.reportePorFechas(fechaInicial,fechaFinal);
-    }
-
-    public void onExcelClickButton(ActionEvent actionEvent) {
+    public void onConexionClickButton(ActionEvent actionEvent) {
         boolean condicion;
         String usuario=txtUsuario.getText();
         String clave=txtClave.getText();
 
         condicion=modelo.conexion(usuario,clave);
         if (condicion){
-            welcomeText.setText("Ingresó");
+            labelMensaje.setText("Ingresó");
         }else {
-            welcomeText.setText("Intente nuevamente");
+            labelMensaje.setText("Intente nuevamente");
         }
+    }
+
+    public void onConsultarClickButton(ActionEvent actionEvent) {
+        String fechaInicial=null,fechaFinal=null;
+        fechaInicial= dateFechaInicial.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        fechaFinal= dateFechaFin.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String link=modelo.reportePorFechas(fechaInicial,fechaFinal);
+        labelMensaje.setText(link);
+    }
+
+    public void onGenerarClickButton(ActionEvent actionEvent) {
     }
 }

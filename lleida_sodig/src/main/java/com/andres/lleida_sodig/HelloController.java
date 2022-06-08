@@ -22,13 +22,20 @@ public class HelloController {
         welcomeText.setText("Hola mi pez :v");
         //modelo.numero();
         modelo.obtenerExcel();
-        Date date = null;
-        modelo.reporteFecha(date);
+        String fechaInicial=null,fechaFinal=null;
+        modelo.reportePorFechas(fechaInicial,fechaFinal);
     }
 
     public void onExcelClickButton(ActionEvent actionEvent) {
+        boolean condicion;
         String usuario=txtUsuario.getText();
         String clave=txtClave.getText();
-        welcomeText.setText("Usuario: "+usuario+" Clave: "+clave);
+
+        condicion=modelo.conexion(usuario,clave);
+        if (condicion){
+            welcomeText.setText("Ingresó");
+        }else {
+            welcomeText.setText("Intente nuevamente");
+        }
     }
 }

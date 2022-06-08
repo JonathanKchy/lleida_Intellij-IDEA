@@ -2,6 +2,7 @@ package com.andres.lleida_sodig;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openxmlformats.schemas.drawingml.x2006.chart.CTRotY;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.FileNotFoundException;
@@ -17,16 +18,76 @@ import java.util.logging.Logger;
 
 public class HelloModel {
 
-    public void reporteFecha(Date date){
+    static String mail_id, mail_date,fecha_andre, mail_type, file_doc_model, file_uid, unidades_certificadas, mail_from, mail_to,direccion_CC="correo@certificado.lleida.net", gstatus, gstatus_aux, mail_subj, add_id, add_displaydate, add_uid;
+    static String user,password;
 
+    //metodo para validar el usuario y la clave
+    public boolean conexion(String usuario,String clave){
+    boolean bool=false;
+    user=usuario;
+    password=clave;
+        try
+
+        {
+            URL url = new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=get_default_settings&user="+usuario+"&password="+clave);
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+            int responseCod = conn.getResponseCode();
+            if (responseCod != 200) {
+                bool=false;
+            } else {
+                StringBuilder informationString=new StringBuilder();
+                Scanner scanner=new Scanner(url.openStream());
+                while (scanner.hasNext()) {
+                    String linea = scanner.nextLine();
+                    if (linea.contains("<status>")) {
+                        int tamano = linea.length();
+                        int fin = tamano - 9;
+                        int status = Integer.parseInt(linea.substring(8, fin));
+                        System.out.println(status);
+                        if (status==100){
+                            bool=true;
+                        }else {
+                            bool=false;
+                        }
+                    }
+                }
+
+            }
+        }catch(Exception e){
+
+        }
+    return  bool;
+    }
+    public void reportePorFechas(String fechaInicial,String fechaFinal){
+
+       try
+        {
+        URL url = new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user=sodigsa@ec&password=TIiANcmymJ");
+        //URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user=sodigsa@ec&password=TIiANcmymJ&mail_date_min=20220501070000&mail_date_max=20220601070000");
+        //URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=download_pdf&user=sodigsa@ec&password=TIiANcmymJ&file_id=75524951");
+
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.connect();
+
+        int responseCod = conn.getResponseCode();
+        if (responseCod != 200) {
+
+        } else {
+
+        }
+    }catch(Exception e){
+
+    }
     }
     public int numero(){
         return 1;
     }
-    static String mail_id, mail_date,fecha_andre, mail_type, file_doc_model, file_uid, unidades_certificadas, mail_from, mail_to,direccion_CC="correo@certificado.lleida.net", gstatus, gstatus_aux, mail_subj, add_id, add_displaydate, add_uid;
+
     public void obtenerExcel() {
         System.out.println("Espere");
-        System.out.println();
         int contador = 0, numeroCelda = 0;
 
         // Creamos el libro de trabajo de Excel formato OOXML
@@ -56,8 +117,10 @@ public class HelloModel {
 
         try {
 
-            URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user=sodigsa@ec&password=TIiANcmymJ&mail_id=97277942");
+            URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user=sodigsa@ec&password=TIiANcmymJ");
             //URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user=sodigsa@ec&password=TIiANcmymJ&mail_date_min=20220501070000&mail_date_max=20220601070000");
+            //URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=download_pdf&user=sodigsa@ec&password=TIiANcmymJ&file_id=75524951");
+
             HttpsURLConnection conn=(HttpsURLConnection)url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
@@ -224,7 +287,7 @@ public class HelloModel {
                         //System.out.println(linea);
                         //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("unidades_certificadas: "+unidades_certificadas);
-                        System.out.println(unidades_certificadas);
+
                         informationString.append("\n");
                     }
                     //+++++++++++++++++++++++++++++

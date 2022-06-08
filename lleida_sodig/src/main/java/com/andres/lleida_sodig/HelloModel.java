@@ -19,7 +19,8 @@ import java.util.logging.Logger;
 public class HelloModel {
 
     static String mail_id, mail_date,fecha_andre, mail_type, file_doc_model, file_uid, unidades_certificadas, mail_from, mail_to,direccion_CC="correo@certificado.lleida.net", gstatus, gstatus_aux, mail_subj, add_id, add_displaydate, add_uid;
-    static String user,password;
+    static String user,password,link="";
+    static Workbook book = new XSSFWorkbook();
 
     //metodo para validar el usuario y la clave
     public boolean conexion(String usuario,String clave){
@@ -37,7 +38,6 @@ public class HelloModel {
             if (responseCod != 200) {
                 bool=false;
             } else {
-                StringBuilder informationString=new StringBuilder();
                 Scanner scanner=new Scanner(url.openStream());
                 while (scanner.hasNext()) {
                     String linea = scanner.nextLine();
@@ -63,42 +63,13 @@ public class HelloModel {
 
 
     //metodo para obtener reporte por rango de fechas
-    public String reportePorFechas(String fechaInicial,String fechaFinal){
+    public Workbook reportePorFechas(String fechaInicial,String fechaFinal){
     String fecha=null;
-       try
-        {
-        URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user="+user+"&password="+password+"&mail_date_min="+fechaInicial+"070000&mail_date_max="+fechaFinal+"070000");
-        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.connect();
-        int responseCod = conn.getResponseCode();
-        if (responseCod != 200) {
-            throw new RuntimeException("ocurrio un error: "+responseCod);
-        } else {
-            fecha= "https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user="+user+"&password="+password+"&mail_date_min="+fechaInicial+"070000&mail_date_max="+fechaFinal+"070000";
-        }
-    }catch(Exception e){
-        System.out.println("Error: "+ e);
-    }
-
-        return fecha;
-    }
-
-
-
-    public int numero(){
-        return 1;
-    }
-
-
-
-
-    public void obtenerExcel() {
-        System.out.println("Espere");
-        int contador = 0, numeroCelda = 0;
+       link="https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user="+user+"&password="+password+"&mail_date_min="+fechaInicial+"070000&mail_date_max="+fechaFinal+"070000";
+       int contador = 0, numeroCelda = 0;
 
         // Creamos el libro de trabajo de Excel formato OOXML
-        Workbook book = new XSSFWorkbook();
+        book = new XSSFWorkbook();
         // La hoja donde pondremos los datos
         Sheet sheet = book.createSheet("Hola Java");
         //creamos una fila
@@ -124,10 +95,7 @@ public class HelloModel {
 
         try {
 
-            URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user=sodigsa@ec&password=TIiANcmymJ");
-            //URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user=sodigsa@ec&password=TIiANcmymJ&mail_date_min=20220501070000&mail_date_max=20220601070000");
-            //URL url= new URL("https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=download_pdf&user=sodigsa@ec&password=TIiANcmymJ&file_id=75524951");
-
+            URL url= new URL(link);
             HttpsURLConnection conn=(HttpsURLConnection)url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
@@ -141,14 +109,10 @@ public class HelloModel {
                 while (scanner.hasNext()) {
                     String linea=scanner.nextLine();
 
-                    //informationString.append("\n");
                     if (linea.contains("<mail_id>")) {
                         int tamano=linea.length();
                         int fin=tamano-10;
                         mail_id=linea.substring(9, fin);
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("mail_id: "+mail_id);
                         informationString.append("\n");
                     }
@@ -156,9 +120,6 @@ public class HelloModel {
                     else if(linea.contains("<mail_date>")) {
                         int tamano=linea.length();
                         int fin=tamano-12;
-
-                        //////
-                        /////
                         int andre_dia, andre_hora,mes_andre;
                         String andre_dia_string,andre_hora_string="01";
                         mes_andre = Integer.parseInt(linea.substring(15,17));
@@ -257,15 +218,8 @@ public class HelloModel {
 
                         }
                         fecha_andre = andre_dia + "/" +mes_andre + "/" + linea.substring(11,15)+ " " + andre_hora_string + ":" + linea.substring(21,23)+ ":" + linea.substring(23,25);
-                        ////
-                        ////
-
-
-
                         mail_date=linea.substring(17,19)+"/"+linea.substring(15,17)+"/"+linea.substring(11,15)+" "+linea.substring(19,21)+":"+linea.substring(21,23)+":"+linea.substring(23,25);
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
+
                         informationString.append("mail_date: "+mail_date);
                         informationString.append("\n");
                     }
@@ -275,9 +229,6 @@ public class HelloModel {
                         int fin=tamano-12;
                         mail_type=linea.substring(11, fin);
 
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("mail_date: "+mail_type);
                         informationString.append("\n");
                     } else if(linea.contains("<credits>")) {
@@ -290,9 +241,6 @@ public class HelloModel {
                         }else {
                             unidades_certificadas="1.00";
                         }
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("unidades_certificadas: "+unidades_certificadas);
 
                         informationString.append("\n");
@@ -302,10 +250,6 @@ public class HelloModel {
                         int tamano=linea.length();
                         int fin=tamano-17;
                         file_doc_model=linea.substring(16, fin);
-
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("file_doc_model: "+file_doc_model);
                         informationString.append("\n");
                     }
@@ -314,10 +258,6 @@ public class HelloModel {
                         int tamano=linea.length();
                         int fin=tamano-11;
                         file_uid=linea.substring(10, fin);
-
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("file_uid: "+file_uid);
                         informationString.append("\n");
                     }
@@ -326,9 +266,6 @@ public class HelloModel {
                         int tamano=linea.length();
                         int fin=tamano-12;
                         mail_from=linea.substring(11, fin);
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("mail_from: "+mail_from);
                         informationString.append("\n");
                     }
@@ -337,9 +274,6 @@ public class HelloModel {
                         int tamano=linea.length();
                         int fin=tamano-10;
                         mail_to=linea.substring(9, fin);
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("mail_to: "+mail_to);
                         informationString.append("\n");
                     }
@@ -348,9 +282,6 @@ public class HelloModel {
                         int tamano=linea.length();
                         int fin=tamano-10;
                         gstatus=linea.substring(9, fin);
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("gstatus: "+gstatus);
                         informationString.append("\n");
                     }
@@ -359,16 +290,10 @@ public class HelloModel {
                         int tamano=linea.length();
                         int fin=tamano-14;
                         gstatus_aux=linea.substring(13, fin);
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("gstatus_aux: "+gstatus_aux);
                         informationString.append("\n");
                     }else if(linea.contains("<gstatus_aux/>")) {
                         gstatus_aux="";
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("gstatus_aux: "+gstatus_aux);                        informationString.append("\n");
                     }
                     //+++++++++++++++++++++++++++++
@@ -376,9 +301,6 @@ public class HelloModel {
                         int tamano=linea.length();
                         int fin=tamano-12;
                         mail_subj=linea.substring(11, fin);
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("mail_subj: "+mail_subj);
                         informationString.append("\n");
                     }
@@ -389,9 +311,6 @@ public class HelloModel {
                         add_id=linea.substring(8, fin);
                         add_uid = "E" + add_id + "-R";
                         add_id = "Displayed";
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("add_id: "+add_id);
                         informationString.append("\n");
                     }
@@ -401,43 +320,11 @@ public class HelloModel {
                         int fin=tamano-18;
                         add_displaydate=linea.substring(23,25)+"/"+linea.substring(21,23)+"/"+linea.substring(17,21)+" "+linea.substring(25,27)+":"+linea.substring(27,29)+":"+linea.substring(29,31);
 
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
                         informationString.append("add_displaydate: "+add_displaydate);
                         informationString.append("\n");
-                    }/*
-                    //+++++++++++++++++++++++++++++
-                    else if(linea.contains("<mail_date>")) {
-                        int tamano=linea.length();
-                        int fin=tamano-12;
-                        row.createCell(numeroCelda).setCellValue(linea.substring(11, fin));
-                        numeroCelda++;
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
-                        informationString.append("mail_date: "+linea.substring(11, fin));
-                        informationString.append("\n");
                     }
-                    //+++++++++++++++++++++++++++++
-                    else if(linea.contains("<mail_date>")) {
-                        int tamano=linea.length();
-                        int fin=tamano-12;
-                        row.createCell(numeroCelda).setCellValue(linea.substring(11, fin));
-                        numeroCelda++;
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
-                        informationString.append("mail_date: "+linea.substring(11, fin));
-                        informationString.append("\n");
-                    }*/
                     else if(linea.contains("</pdf_row>")) {
-                        int tamano=linea.length();
-                        int fin=tamano-10;
-                        //System.out.println(linea.length());
-                        //System.out.println(linea);
-                        //System.out.println("mail_id: "+linea.substring(9, fin));
-                        // informationString.append("gstatus: "+linea.substring(9, fin));
+
                         informationString.append("\n");
                         contador++;
                         row=sheet.createRow(contador);
@@ -486,22 +373,17 @@ public class HelloModel {
                 //System.out.println(informationString);
                 System.out.println(contador);
             }
-            // System.out.println("Elemento raiz:"+documentoXML.getDocumentElement().getNodeName());
-
-
         } catch (Exception e) {
             System.out.println("error: ");
         }
-
-
-
-
-        CrearExcel(book);
-        System.out.println("hecho: ");
+        //CrearExcel(book);
+        //System.out.println("hecho: ");
+        return book;
     }
 
-    public static void CrearExcel(Workbook book) {
-
+    //metodo para obtener Excel
+    public String obtenerExcel(Workbook book) {
+        String mensaje="no se puedo descargar";
         // Creamos el estilo paga las celdas del encabezado
         CellStyle style = book.createCellStyle();
         // Indicamos que tendra un fondo azul aqua
@@ -521,6 +403,7 @@ public class HelloModel {
                 // Excel via ese
                 // flujo de datos
                 book.write(fileout);
+                mensaje="El excel está en el escritorio";
             } catch (IOException ex) {
                 Logger.getLogger(HelloModel.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -535,5 +418,6 @@ public class HelloModel {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(HelloModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return mensaje;
     }
 }

@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -23,7 +25,7 @@ public class HelloController {
     public TextField txtClave;
     public Button btnExcel;
 
-
+    static Workbook book = new XSSFWorkbook();
 
     @FXML
     public void onConexionClickButton(ActionEvent actionEvent) {
@@ -43,10 +45,12 @@ public class HelloController {
         String fechaInicial=null,fechaFinal=null;
         fechaInicial= dateFechaInicial.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         fechaFinal= dateFechaFin.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        String link=modelo.reportePorFechas(fechaInicial,fechaFinal);
-        labelMensaje.setText(link);
+        book =modelo.reportePorFechas(fechaInicial,fechaFinal);
+        //labelMensaje.setText(link);
     }
 
     public void onGenerarClickButton(ActionEvent actionEvent) {
+        String mensaje=modelo.obtenerExcel(book);
+        labelMensaje.setText(mensaje);
     }
 }

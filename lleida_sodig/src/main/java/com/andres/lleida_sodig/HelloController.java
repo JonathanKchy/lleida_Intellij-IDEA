@@ -31,9 +31,7 @@ public class HelloController {
 
     static Workbook book = new XSSFWorkbook();
 
-    ObservableList<Product> list=FXCollections.observableArrayList(
-            new Product("andres","13","leon")
-    );
+    ObservableList<Product> list=FXCollections.observableArrayList();
 
 
     @FXML
@@ -42,6 +40,8 @@ public class HelloController {
         tcID.setCellValueFactory(new PropertyValueFactory<Product,String>("name"));
         tcDate.setCellValueFactory(new PropertyValueFactory<Product,String>("age"));
         tcDate2.setCellValueFactory(new PropertyValueFactory<Product,String>("animal"));
+        Product p=new Product("2","2","2");
+        list.add(p);
         table.setItems(list);
 
         boolean condicion;

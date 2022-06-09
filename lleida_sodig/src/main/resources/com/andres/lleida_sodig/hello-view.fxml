@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andres.lleida_sodig.HelloController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="291.0" prefWidth="537.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andres.lleida_sodig.HelloController">
    <children>
       <HBox prefHeight="271.0" prefWidth="398.0">
          <children>
@@ -52,14 +52,15 @@
             </VBox>
             <Pane prefHeight="171.0" prefWidth="172.0">
                <children>
-                  <VBox prefHeight="271.0" prefWidth="147.0">
+                  <VBox layoutX="-9.0" prefHeight="271.0" prefWidth="288.0">
                      <children>
                         <DatePicker fx:id="dateFechaInicial" />
                         <DatePicker fx:id="dateFechaFin" />
-                        <TableView prefHeight="200.0" prefWidth="200.0">
+                        <TableView fx:id="table" prefHeight="189.0" prefWidth="266.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn fx:id="tcID" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="tcDate" prefWidth="75.0" text="DATE" />
+                              <TableColumn fx:id="tcDate2" prefWidth="75.0" text="DATE 2" />
                           </columns>
                         </TableView>
                      </children>

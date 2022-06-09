@@ -1,11 +1,11 @@
 package com.andres.lleida_sodig;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -20,6 +20,10 @@ public class HelloController {
     public Label labelMensaje;
     public DatePicker dateFechaInicial;
     public DatePicker dateFechaFin;
+    public TableView<Product> table;
+    public TableColumn<Product,String> tcID;
+    public TableColumn<Product,String> tcDate;
+    public TableColumn<Product,String> tcDate2;
     private HelloModel modelo=new HelloModel();
     public TextField txtUsuario;
     public TextField txtClave;
@@ -27,8 +31,19 @@ public class HelloController {
 
     static Workbook book = new XSSFWorkbook();
 
+    ObservableList<Product> list=FXCollections.observableArrayList(
+            new Product("andres","13","leon")
+    );
+
+
     @FXML
     public void onConexionClickButton(ActionEvent actionEvent) {
+        //
+        tcID.setCellValueFactory(new PropertyValueFactory<Product,String>("name"));
+        tcDate.setCellValueFactory(new PropertyValueFactory<Product,String>("age"));
+        tcDate2.setCellValueFactory(new PropertyValueFactory<Product,String>("animal"));
+        table.setItems(list);
+
         boolean condicion;
         String usuario=txtUsuario.getText();
         String clave=txtClave.getText();

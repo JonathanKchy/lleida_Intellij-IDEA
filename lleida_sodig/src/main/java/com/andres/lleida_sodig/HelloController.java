@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -39,12 +41,16 @@ public class HelloController {
     public TableColumn<Correo,String> Doc_Visualizado;
     public TableColumn<Correo,String> Fecha_Visualización;
     public TableColumn<Correo,String> Add_UID;
+    public ImageView imagen;
     private HelloModel modelo=new HelloModel();
     public TextField txtUsuario;
     public TextField txtClave;
     public Button btnExcel;
 
     static Workbook book = new XSSFWorkbook();
+
+
+
 
     //ObservableList<Correo> list=FXCollections.observableArrayList();
 

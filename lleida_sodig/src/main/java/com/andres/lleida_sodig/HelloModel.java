@@ -304,7 +304,8 @@ public class HelloModel {
                         informationString.append("\n");
                     }else if(linea.contains("<gstatus_aux/>")) {
                         gstatus_aux="";
-                        informationString.append("gstatus_aux: "+gstatus_aux);                        informationString.append("\n");
+                        informationString.append("gstatus_aux: "+gstatus_aux);
+                        informationString.append("\n");
                     }
                     //+++++++++++++++++++++++++++++
                     else if(linea.contains("<mail_subj>")) {
@@ -334,6 +335,7 @@ public class HelloModel {
                         informationString.append("\n");
                     }
                     else if(linea.contains("</pdf_row>")) {
+                        Correo p=new Correo(mail_id,mail_date,fecha_andre,mail_type,file_doc_model,file_uid,unidades_certificadas,mail_from,mail_to,direccion_CC,gstatus,gstatus_aux,mail_subj,add_id,add_displaydate,add_uid);
 
                         informationString.append("\n");
                         contador++;
@@ -372,7 +374,6 @@ public class HelloModel {
                         row.createCell(numeroCelda).setCellValue(add_uid);
                         numeroCelda++;
 
-                        Correo p=new Correo(mail_id,mail_date,fecha_andre,mail_type,file_doc_model,file_uid,unidades_certificadas,mail_from,mail_to,direccion_CC,gstatus,gstatus_aux,mail_subj,add_id,add_displaydate,add_uid);
                         list.add(p);
                         //seteo de variables
                         mail_date=mail_date=unidades_certificadas=mail_type=fecha_andre=file_doc_model=file_uid=mail_from=mail_to=gstatus=gstatus_aux=mail_subj=add_id=add_uid=add_displaydate="";

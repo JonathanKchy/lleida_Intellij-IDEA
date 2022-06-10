@@ -1,17 +1,19 @@
 package com.andres.lleida_sodig;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class HelloController {
     @FXML
@@ -50,8 +52,8 @@ public class HelloController {
     public void CargarTabla(ObservableList<Correo> list){
         Id.setCellValueFactory(new PropertyValueFactory<Correo,String>("Id"));
         Fecha_Lleida.setCellValueFactory(new PropertyValueFactory<Correo,String>("Fecha_Lleida"));
-        Fecha_Local.setCellValueFactory(new PropertyValueFactory<Correo,String>("Tipo"));
-        Tipo.setCellValueFactory(new PropertyValueFactory<Correo,String>("Doc_OkKo"));
+        Fecha_Local.setCellValueFactory(new PropertyValueFactory<Correo,String>("Fecha_Local"));
+        Tipo.setCellValueFactory(new PropertyValueFactory<Correo,String>("Tipo"));
         Doc_OkKo.setCellValueFactory(new PropertyValueFactory<Correo,String>("Doc_OkKo"));
         Doc_UID.setCellValueFactory(new PropertyValueFactory<Correo,String>("Doc_UID"));
         Unidades_Certificadas.setCellValueFactory(new PropertyValueFactory<Correo,String>("Unidades_Certificadas"));
@@ -97,8 +99,29 @@ public class HelloController {
         CargarTabla(list);
     }
 
-    public void onGenerarClickButton(ActionEvent actionEvent) {
-        String mensaje=modelo.obtenerExcel(book);
-        labelMensaje.setText(mensaje);
+    public void onGenerarClickButton(ActionEvent actionEvent) throws IOException {
+        //String mensaje=modelo.obtenerExcel(book);
+        //labelMensaje.setText(mensaje);
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Hello2.fxml"));
+        Parent root= fxmlLoader.load();
+        Hello2 controlador=fxmlLoader.getController();
+       //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Hello2.fxml"));
+        //Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene=new Scene(root);
+         Stage stage = new Stage();
+        stage.setTitle("Hello2!");
+        stage.setScene(scene);
+        stage.show();
+        stage.setOnCloseRequest(e -> {
+            try {
+                controlador.closeWindows();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        Stage myStage=(Stage) this.btnConexion.getScene().getWindow();
+        myStage.close();
     }
+
 }

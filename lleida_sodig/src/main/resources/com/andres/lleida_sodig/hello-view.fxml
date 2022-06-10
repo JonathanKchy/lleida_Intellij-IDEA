@@ -29,7 +29,7 @@
                      <HBox prefHeight="100.0" prefWidth="200.0">
                          <children>
                            <Label text="Usuario: " />
-                           <TextField fx:id="txtUsuario" prefHeight="17.0" prefWidth="149.0" />
+                           <TextField fx:id="txtUsuario" prefHeight="17.0" prefWidth="149.0" text="sodigsa@ec" />
                         </children>
                      </HBox>
                      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -61,7 +61,7 @@
                             <TableColumn fx:id="Id" prefWidth="75.0" text="Id" />
                             <TableColumn fx:id="Fecha_Lleida" prefWidth="75.0" text="Fecha Lleida" />
                               <TableColumn fx:id="Fecha_Local" prefWidth="75.0" text="Fecha Local" />
-                              <TableColumn fx:id="Tipo" prefWidth="75.0" text="Fecha Local" />
+                              <TableColumn fx:id="Tipo" prefWidth="75.0" text="Tipo" />
                               <TableColumn fx:id="Doc_OkKo" prefWidth="75.0" text="Doc_OkKo" />
                               <TableColumn fx:id="Doc_UID" prefWidth="75.0" text="Doc_UID" />
                               <TableColumn fx:id="Unidades_Certificadas" prefWidth="75.0" text="Unidades Certificadas" />

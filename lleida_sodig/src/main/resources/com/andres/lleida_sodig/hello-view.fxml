@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="291.0" prefWidth="537.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andres.lleida_sodig.HelloController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="307.0" prefWidth="1764.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andres.lleida_sodig.HelloController">
    <children>
       <HBox prefHeight="271.0" prefWidth="398.0">
          <children>
@@ -52,15 +52,30 @@
             </VBox>
             <Pane prefHeight="171.0" prefWidth="172.0">
                <children>
-                  <VBox layoutX="-9.0" prefHeight="271.0" prefWidth="288.0">
+                  <VBox layoutX="-9.0" prefHeight="271.0" prefWidth="1465.0">
                      <children>
                         <DatePicker fx:id="dateFechaInicial" />
                         <DatePicker fx:id="dateFechaFin" />
-                        <TableView fx:id="table" prefHeight="189.0" prefWidth="266.0">
+                        <TableView fx:id="table" prefHeight="189.0" prefWidth="1393.0">
                           <columns>
-                            <TableColumn fx:id="tcID" prefWidth="75.0" text="ID" />
-                            <TableColumn fx:id="tcDate" prefWidth="75.0" text="DATE" />
-                              <TableColumn fx:id="tcDate2" prefWidth="75.0" text="DATE 2" />
+                            <TableColumn fx:id="Id" prefWidth="75.0" text="Id" />
+                            <TableColumn fx:id="Fecha_Lleida" prefWidth="75.0" text="Fecha Lleida" />
+                              <TableColumn fx:id="Fecha_Local" prefWidth="75.0" text="Fecha Local" />
+                              <TableColumn fx:id="Tipo" prefWidth="75.0" text="Fecha Local" />
+                              <TableColumn fx:id="Doc_OkKo" prefWidth="75.0" text="Doc_OkKo" />
+                              <TableColumn fx:id="Doc_UID" prefWidth="75.0" text="Doc_UID" />
+                              <TableColumn fx:id="Unidades_Certificadas" prefWidth="75.0" text="Unidades Certificadas" />
+                              <TableColumn fx:id="Dirección_Origen" prefWidth="75.0" text="Dirección Origen" />
+                              <TableColumn fx:id="Dirección_Destino" prefWidth="75.0" text="Dirección Destino" />
+                              <TableColumn fx:id="Dirección_Cc" prefWidth="75.0" text="Dirección Cc" />
+                              <TableColumn fx:id="Estado" prefWidth="75.0" text="Estado" />
+                              <TableColumn fx:id="Estado_Aux" prefWidth="75.0" text="Estado Aux" />
+                              <TableColumn fx:id="Asunto" prefWidth="75.0" text="Asunto" />
+                              <TableColumn fx:id="Doc_Visualizado" prefWidth="75.0" text="Doc_Visualizado" />
+                              <TableColumn fx:id="Fecha_Visualización" prefWidth="75.0" text="Fecha y hora de visualización" />
+                              <TableColumn fx:id="Add_UID" prefWidth="75.0" text="Add_UID" />
+
+
                           </columns>
                         </TableView>
                      </children>

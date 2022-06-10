@@ -20,10 +20,23 @@ public class HelloController {
     public Label labelMensaje;
     public DatePicker dateFechaInicial;
     public DatePicker dateFechaFin;
-    public TableView<Product> table;
-    public TableColumn<Product,String> tcID;
-    public TableColumn<Product,String> tcDate;
-    public TableColumn<Product,String> tcDate2;
+    public TableView<Correo> table;
+    public TableColumn<Correo,String> Id;
+    public TableColumn<Correo,String> Fecha_Lleida;
+    public TableColumn<Correo,String> Fecha_Local;
+    public TableColumn<Correo,String> Tipo;
+    public TableColumn<Correo,String> Doc_OkKo;
+    public TableColumn<Correo,String> Doc_UID;
+    public TableColumn<Correo,String> Unidades_Certificadas;
+    public TableColumn<Correo,String> Dirección_Origen;
+    public TableColumn<Correo,String> Dirección_Destino;
+    public TableColumn<Correo,String> Dirección_Cc;
+    public TableColumn<Correo,String> Estado;
+    public TableColumn<Correo,String> Estado_Aux;
+    public TableColumn<Correo,String> Asunto;
+    public TableColumn<Correo,String> Doc_Visualizado;
+    public TableColumn<Correo,String> Fecha_Visualización;
+    public TableColumn<Correo,String> Add_UID;
     private HelloModel modelo=new HelloModel();
     public TextField txtUsuario;
     public TextField txtClave;
@@ -31,18 +44,35 @@ public class HelloController {
 
     static Workbook book = new XSSFWorkbook();
 
-    ObservableList<Product> list=FXCollections.observableArrayList();
+    //ObservableList<Correo> list=FXCollections.observableArrayList();
 
+    //metodo para cargar a lista
+    public void CargarTabla(ObservableList<Correo> list){
+        Id.setCellValueFactory(new PropertyValueFactory<Correo,String>("Id"));
+        Fecha_Lleida.setCellValueFactory(new PropertyValueFactory<Correo,String>("Fecha_Lleida"));
+        Fecha_Local.setCellValueFactory(new PropertyValueFactory<Correo,String>("Tipo"));
+        Tipo.setCellValueFactory(new PropertyValueFactory<Correo,String>("Doc_OkKo"));
+        Doc_OkKo.setCellValueFactory(new PropertyValueFactory<Correo,String>("Doc_OkKo"));
+        Doc_UID.setCellValueFactory(new PropertyValueFactory<Correo,String>("Doc_UID"));
+        Unidades_Certificadas.setCellValueFactory(new PropertyValueFactory<Correo,String>("Unidades_Certificadas"));
+        Dirección_Origen.setCellValueFactory(new PropertyValueFactory<Correo,String>("Dirección_Origen"));
+        Dirección_Destino.setCellValueFactory(new PropertyValueFactory<Correo,String>("Dirección_Destino"));
+        Dirección_Cc.setCellValueFactory(new PropertyValueFactory<Correo,String>("Dirección_Cc"));
+        Estado.setCellValueFactory(new PropertyValueFactory<Correo,String>("Estado"));
+        Estado_Aux.setCellValueFactory(new PropertyValueFactory<Correo,String>("Estado_Aux"));
+        Asunto.setCellValueFactory(new PropertyValueFactory<Correo,String>("Asunto"));
+        Doc_Visualizado.setCellValueFactory(new PropertyValueFactory<Correo,String>("Doc_Visualizado"));
+        Fecha_Visualización.setCellValueFactory(new PropertyValueFactory<Correo,String>("Fecha_Visualización"));
+        Add_UID.setCellValueFactory(new PropertyValueFactory<Correo,String>("Add_UID"));
+
+        //Correo p=new Correo("2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2");
+        //list.add(p);
+        table.setItems(list);
+    }
 
     @FXML
     public void onConexionClickButton(ActionEvent actionEvent) {
-        //
-        tcID.setCellValueFactory(new PropertyValueFactory<Product,String>("name"));
-        tcDate.setCellValueFactory(new PropertyValueFactory<Product,String>("age"));
-        tcDate2.setCellValueFactory(new PropertyValueFactory<Product,String>("animal"));
-        Product p=new Product("2","2","2");
-        list.add(p);
-        table.setItems(list);
+
 
         boolean condicion;
         String usuario=txtUsuario.getText();
@@ -62,6 +92,9 @@ public class HelloController {
         fechaFinal= dateFechaFin.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         book =modelo.reportePorFechas(fechaInicial,fechaFinal);
         //labelMensaje.setText(link);
+
+        ObservableList<Correo> list=modelo.enviarLista();
+        CargarTabla(list);
     }
 
     public void onGenerarClickButton(ActionEvent actionEvent) {

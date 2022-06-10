@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="307.0" prefWidth="1764.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andres.lleida_sodig.HelloController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="307.0" prefWidth="824.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andres.lleida_sodig.HelloController">
    <children>
       <HBox prefHeight="271.0" prefWidth="398.0">
          <children>
@@ -35,7 +35,7 @@
                      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                         <children>
                            <Label text="Clave: " />
-                           <TextField fx:id="txtClave" />
+                           <TextField fx:id="txtClave" text="TIiANcmymJ" />
                         </children>
                      </HBox>
 
@@ -52,11 +52,11 @@
             </VBox>
             <Pane prefHeight="171.0" prefWidth="172.0">
                <children>
-                  <VBox layoutX="-9.0" prefHeight="271.0" prefWidth="1465.0">
+                  <VBox layoutX="-9.0" prefHeight="271.0" prefWidth="521.0">
                      <children>
                         <DatePicker fx:id="dateFechaInicial" />
                         <DatePicker fx:id="dateFechaFin" />
-                        <TableView fx:id="table" prefHeight="189.0" prefWidth="1393.0">
+                        <TableView fx:id="table" prefHeight="189.0" prefWidth="1263.0">
                           <columns>
                             <TableColumn fx:id="Id" prefWidth="75.0" text="Id" />
                             <TableColumn fx:id="Fecha_Lleida" prefWidth="75.0" text="Fecha Lleida" />

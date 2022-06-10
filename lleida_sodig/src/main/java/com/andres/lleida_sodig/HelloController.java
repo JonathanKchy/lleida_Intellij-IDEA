@@ -70,6 +70,8 @@ public class HelloController {
         //Correo p=new Correo("2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2");
         //list.add(p);
         table.setItems(list);
+        table.setMaxSize(500,600);
+        table.setMinSize(250,300);
     }
 
     @FXML

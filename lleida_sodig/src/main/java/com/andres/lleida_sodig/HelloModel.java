@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 public class HelloModel {
 
-    static String mail_id, mail_date,fecha_andre, mail_type, file_doc_model, file_uid, unidades_certificadas, mail_from, mail_to,direccion_CC="correo@certificado.lleida.net", gstatus, gstatus_aux, mail_subj, add_id, add_displaydate, add_uid;
+    static String mail_id, mail_date,fecha_Ecuador, mail_type, file_doc_model, file_uid, unidades_certificadas, mail_from, mail_to,direccion_CC="correo@certificado.lleida.net", gstatus, gstatus_aux, mail_subj, add_id, add_displaydate, add_uid;
     static String user,password,link="";
     static Workbook book = new XSSFWorkbook();
 
@@ -101,6 +101,9 @@ public class HelloModel {
         row.createCell(14).setCellValue("Fecha y hora de visualización");
         row.createCell(15).setCellValue("Add_UID");
 
+        //esta variable servirá para almacenar el número del día anterior, sirve para poder cambiar
+        //la fecha que nos entrega lleida a la fecha de Ecuador ya que el servidor de lleida está
+        //adelantado en relación de  nosotros por 7 horas
         int dia_anterior = 1;
 
         try {
@@ -128,106 +131,120 @@ public class HelloModel {
                     }
                     //+++++++++++++++++++++++++++++
                     else if(linea.contains("<mail_date>")) {
-                        int tamano=linea.length();
-                        int fin=tamano-12;
-                        int andre_dia, andre_hora,mes_andre;
-                        String andre_dia_string,andre_hora_string="01";
-                        mes_andre = Integer.parseInt(linea.substring(15,17));
-                        andre_dia = Integer.parseInt(linea.substring(17,19));
-                        andre_hora = Integer.parseInt(linea.substring(19,21));
+                        //int tamano=linea.length();
+                        //int fin=tamano-12;
 
-                        if (dia_anterior <=andre_dia)
+                        //dia_Ecuador, permite capturar el valor del día del correo de lleida
+                        //hora_Ecuador, permite capturar el valor de la hora del correo de lleida
+                        //mes_Ecuador, permite capturar el valor del mes del correo de lleida
+                        int dia_Ecuador, hora_Ecuador,mes_Ecuador;
+                        // hora_Ecuador_string, permite capturar la hora del correo en formato string,
+                        //se setea en 01 solo por evitar el try catch
+                        String hora_Ecuador_string="01";
+                        mes_Ecuador = Integer.parseInt(linea.substring(15,17));
+                        dia_Ecuador = Integer.parseInt(linea.substring(17,19));
+                        hora_Ecuador = Integer.parseInt(linea.substring(19,21));
+                        //se compara si el día anterior que se seteo en 1, es menosr que el día capturado
+                        //desde lleida, así podemos setear el día de Ecuador. Ejemplo si el correo desde
+                        //lleida me llega con fecha 01/03/2022 05h:30m:20s yo debo tener el día anterior
+                        //se el 30 o 31 y poner fecha de Ecuador como 30/02/2022 22h:30m:20s
+                        if (dia_anterior <=dia_Ecuador)
                         {
-                            dia_anterior = andre_dia;
+                            dia_anterior = dia_Ecuador;
                         }
-                        switch (andre_hora)
+                        //como se que la hora de lleida tiene 7 horas en adelanto, se debe setear la hora de Ecuador
+                        switch (hora_Ecuador)
                         {
                             case 23:
-                                andre_hora_string = "16";
+                                hora_Ecuador_string = "16";
                                 break;
                             case 22:
-                                andre_hora_string = "15";
+                                hora_Ecuador_string = "15";
                                 break;
                             case 21:
-                                andre_hora_string = "14";
+                                hora_Ecuador_string = "14";
                                 break;
                             case 20:
-                                andre_hora_string = "13";
+                                hora_Ecuador_string = "13";
                                 break;
                             case 19:
-                                andre_hora_string = "12";
+                                hora_Ecuador_string = "12";
                                 break;
                             case 18:
-                                andre_hora_string = "11";
+                                hora_Ecuador_string = "11";
                                 break;
                             case 17:
-                                andre_hora_string = "10";
+                                hora_Ecuador_string = "10";
                                 break;
                             case 16:
-                                andre_hora_string = "09";
+                                hora_Ecuador_string = "09";
                                 break;
                             case 15:
-                                andre_hora_string = "08";
+                                hora_Ecuador_string = "08";
                                 break;
                             case 14:
-                                andre_hora_string = "07";
+                                hora_Ecuador_string = "07";
                                 break;
                             case 13:
-                                andre_hora_string = "06";
+                                hora_Ecuador_string = "06";
                                 break;
                             case 12:
-                                andre_hora_string = "05";
+                                hora_Ecuador_string = "05";
                                 break;
                             case 11:
-                                andre_hora_string = "04";
+                                hora_Ecuador_string = "04";
                                 break;
                             case 10:
-                                andre_hora_string = "03";
+                                hora_Ecuador_string = "03";
                                 break;
                             case 9:
-                                andre_hora_string = "02";
+                                hora_Ecuador_string = "02";
                                 break;
                             case 8:
-                                andre_hora_string = "01";
+                                hora_Ecuador_string = "01";
                                 break ;
                             case 7:
-                                andre_hora_string = "00";
+                                hora_Ecuador_string = "00";
                                 break;
                             case 6:
-                                andre_hora_string = "23";
+                                hora_Ecuador_string = "23";
                                 break;
                             case 5:
-                                andre_hora_string = "22";
+                                hora_Ecuador_string = "22";
                                 break;
                             case 4:
-                                andre_hora_string = "21";
+                                hora_Ecuador_string = "21";
                                 break;
                             case 3:
-                                andre_hora_string = "20";
+                                hora_Ecuador_string = "20";
                                 break;
                             case 2:
-                                andre_hora_string = "19";
+                                hora_Ecuador_string = "19";
                                 break;
                             case 1:
-                                andre_hora_string = "18";
+                                hora_Ecuador_string = "18";
                                 break;
                             case 0:
-                                andre_hora_string = "17";
+                                hora_Ecuador_string = "17";
                                 break;
                             default:
                                 break;
                         }
-                        if (andre_hora<7)
+                        //si la hora de Ecuador es menor a 7, se debe bajar un día al dia que envio lleida
+                        if (hora_Ecuador<7)
                         {
-                            andre_dia = andre_dia-1;
-                            if (andre_dia==0)
+                            dia_Ecuador = dia_Ecuador-1;
+
+                            //si dia_Ecuador es igaul a cero significa que debemos obtener el día anterior ya que no existe
+                            //el día cero en el calendario y restar un mes
+                            if (dia_Ecuador==0)
                             {
-                                andre_dia = dia_anterior;
-                                mes_andre = mes_andre-1;
+                                dia_Ecuador = dia_anterior;
+                                mes_Ecuador = mes_Ecuador-1;
                             }
 
                         }
-                        fecha_andre = andre_dia + "/" +mes_andre + "/" + linea.substring(11,15)+ " " + andre_hora_string + ":" + linea.substring(21,23)+ ":" + linea.substring(23,25);
+                        fecha_Ecuador = dia_Ecuador + "/" +mes_Ecuador + "/" + linea.substring(11,15)+ " " + hora_Ecuador_string + ":" + linea.substring(21,23)+ ":" + linea.substring(23,25);
                         mail_date=linea.substring(17,19)+"/"+linea.substring(15,17)+"/"+linea.substring(11,15)+" "+linea.substring(19,21)+":"+linea.substring(21,23)+":"+linea.substring(23,25);
 
                         informationString.append("mail_date: "+mail_date);
@@ -335,7 +352,7 @@ public class HelloModel {
                         informationString.append("\n");
                     }
                     else if(linea.contains("</pdf_row>")) {
-                        Correo p=new Correo(mail_id,mail_date,fecha_andre,mail_type,file_doc_model,file_uid,unidades_certificadas,mail_from,mail_to,direccion_CC,gstatus,gstatus_aux,mail_subj,add_id,add_displaydate,add_uid);
+                        Correo p=new Correo(mail_id,mail_date,fecha_Ecuador,mail_type,file_doc_model,file_uid,unidades_certificadas,mail_from,mail_to,direccion_CC,gstatus,gstatus_aux,mail_subj,add_id,add_displaydate,add_uid);
 
                         informationString.append("\n");
                         contador++;
@@ -345,7 +362,7 @@ public class HelloModel {
                         numeroCelda++;
                         row.createCell(numeroCelda).setCellValue(mail_date);
                         numeroCelda++;
-                        row.createCell(numeroCelda).setCellValue(fecha_andre);
+                        row.createCell(numeroCelda).setCellValue(fecha_Ecuador);
                         numeroCelda++;
                         row.createCell(numeroCelda).setCellValue(mail_type);
                         numeroCelda++;
@@ -376,7 +393,7 @@ public class HelloModel {
 
                         list.add(p);
                         //seteo de variables
-                        mail_date=mail_date=unidades_certificadas=mail_type=fecha_andre=file_doc_model=file_uid=mail_from=mail_to=gstatus=gstatus_aux=mail_subj=add_id=add_uid=add_displaydate="";
+                        mail_date=mail_date=unidades_certificadas=mail_type=fecha_Ecuador=file_doc_model=file_uid=mail_from=mail_to=gstatus=gstatus_aux=mail_subj=add_id=add_uid=add_displaydate="";
                         //nueva fila
                         numeroCelda=0;
                     }

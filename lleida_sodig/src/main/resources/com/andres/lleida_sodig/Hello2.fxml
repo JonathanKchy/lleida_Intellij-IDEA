@@ -12,29 +12,43 @@
                <HBox alignment="CENTER" prefHeight="54.0" prefWidth="243.0">
                   <children>
                      <Label text="Fecha Inicio: " />
-                     <DatePicker prefHeight="25.0" prefWidth="110.0" />
+                     <DatePicker fx:id="dateFechaInicial" prefHeight="25.0" prefWidth="110.0" />
                   </children>
                </HBox>
                <HBox alignment="CENTER" prefHeight="46.0" prefWidth="228.0">
                   <children>
                      <Label text="Fecha Fin: " />
-                     <DatePicker prefHeight="25.0" prefWidth="117.0" />
+                     <DatePicker fx:id="dateFechaFin" prefHeight="25.0" prefWidth="117.0" />
                   </children>
                </HBox>
             </children>
          </VBox>
          <VBox alignment="CENTER" prefHeight="100.0" prefWidth="195.0">
             <children>
-               <Button fx:id="btnConsultar" alignment="CENTER" mnemonicParsing="false" text="Consultar Datos" />
-               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Generar Excel" />
+               <Button fx:id="btnConsultar" alignment="CENTER" mnemonicParsing="false" onAction="#onConsultarClickButton" text="Consultar Datos" />
+               <Button fx:id="btnExcel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onGenerarClickButton" text="Generar Excel" />
             </children>
          </VBox>
       </children>
    </HBox>
-   <TableView layoutX="8.0" layoutY="100.0" prefHeight="200.0" prefWidth="339.0">
-     <columns>
-       <TableColumn prefWidth="75.0" text="C1" />
-       <TableColumn prefWidth="75.0" text="C2" />
-     </columns>
+   <TableView fx:id="table" layoutX="8.0" layoutY="100.0" prefHeight="200.0" prefWidth="339.0">
+      <columns>
+         <TableColumn fx:id="Id" prefWidth="75.0" text="Id" />
+         <TableColumn fx:id="Fecha_Lleida" prefWidth="75.0" text="Fecha Lleida" />
+         <TableColumn fx:id="Fecha_Local" prefWidth="75.0" text="Fecha Local" />
+         <TableColumn fx:id="Tipo" prefWidth="75.0" text="Tipo" />
+         <TableColumn fx:id="Doc_OkKo" prefWidth="75.0" text="Doc_OkKo" />
+         <TableColumn fx:id="Doc_UID" prefWidth="75.0" text="Doc_UID" />
+         <TableColumn fx:id="Unidades_Certificadas" prefWidth="75.0" text="Unidades Certificadas" />
+         <TableColumn fx:id="Dirección_Origen" prefWidth="75.0" text="Dirección Origen" />
+         <TableColumn fx:id="Dirección_Destino" prefWidth="75.0" text="Dirección Destino" />
+         <TableColumn fx:id="Dirección_Cc" prefWidth="75.0" text="Dirección Cc" />
+         <TableColumn fx:id="Estado" prefWidth="75.0" text="Estado" />
+         <TableColumn fx:id="Estado_Aux" prefWidth="75.0" text="Estado Aux" />
+         <TableColumn fx:id="Asunto" prefWidth="75.0" text="Asunto" />
+         <TableColumn fx:id="Doc_Visualizado" prefWidth="75.0" text="Doc_Visualizado" />
+         <TableColumn fx:id="Fecha_Visualización" prefWidth="75.0" text="Fecha y hora de visualización" />
+         <TableColumn fx:id="Add_UID" prefWidth="75.0" text="Add_UID" />
+      </columns>
    </TableView>
 </AnchorPane>

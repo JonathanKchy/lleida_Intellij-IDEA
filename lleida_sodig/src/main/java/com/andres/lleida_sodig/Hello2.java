@@ -63,8 +63,8 @@ public class Hello2 {
         //Correo p=new Correo("2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2");
         //list.add(p);
         table.setItems(list);
-        table.setMaxSize(500,600);
-        table.setMinSize(250,300);
+        table.setMaxSize(300,300);
+        table.setMinSize(200,200);
     }
 
     public void closeWindows() throws IOException {
@@ -93,8 +93,8 @@ public class Hello2 {
     }
 
     public void onGenerarClickButton(ActionEvent actionEvent) throws IOException {
-        //String mensaje=modelo.obtenerExcel(book);
-        //labelMensaje.setText(mensaje);
+        String mensaje=modelo.obtenerExcel(book);
+        labellabel.setText(mensaje);
 
        /* FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Hello2.fxml"));
         Parent root= fxmlLoader.load();

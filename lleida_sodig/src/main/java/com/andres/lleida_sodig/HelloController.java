@@ -17,6 +17,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
+import static javafx.application.Application.launch;
+
 public class HelloController {
     @FXML
     public Button btnConexion;
@@ -41,7 +43,11 @@ public class HelloController {
     public TableColumn<Correo,String> Doc_Visualizado;
     public TableColumn<Correo,String> Fecha_Visualización;
     public TableColumn<Correo,String> Add_UID;
-    public ImageView imagen;
+    public  Image img=new Image("E:\\classs\\IntelliJ IDEA\\LLEIDA\\lleida_sodig\\src\\main\\java\\com\\andres\\lleida_sodig\\folder_images_15503.png");
+    //file:C:\Users\Andrés Aymacaña\Desktop\sodig.jpg
+
+    public  ImageView imagen=new ImageView();
+
     private HelloModel modelo=new HelloModel();
     public TextField txtUsuario;
     public TextField txtClave;
@@ -49,7 +55,20 @@ public class HelloController {
 
     static Workbook book = new XSSFWorkbook();
 
+   /* public static void main(String[] args) {
+        imagen.setFitHeight(100);
+        imagen.setFitWidth(100);
+        imagen.setImage(img);
+        launch();
 
+    }*/
+
+    @FXML
+    public void start() throws Exception {
+        imagen.setFitHeight(100);
+        imagen.setFitWidth(100);
+        imagen.setImage(img);
+    }
 
 
     //ObservableList<Correo> list=FXCollections.observableArrayList();
@@ -81,16 +100,18 @@ public class HelloController {
     }
 
     @FXML
-    public void onConexionClickButton(ActionEvent actionEvent) {
-
-
-        boolean condicion;
+    public void onConexionClickButton(ActionEvent actionEvent) throws IOException {
+imagen.setFitHeight(100);
+imagen.setFitWidth(100);
+imagen.setImage(img);
+      boolean condicion;
         String usuario=txtUsuario.getText();
         String clave=txtClave.getText();
 
         condicion=modelo.conexion(usuario,clave);
         if (condicion){
             labelMensaje.setText("Ingresó");
+            irSecondWindows();
         }else {
             labelMensaje.setText("Intente nuevamente");
         }
@@ -107,7 +128,7 @@ public class HelloController {
         CargarTabla(list);
     }
 
-    public void onGenerarClickButton(ActionEvent actionEvent) throws IOException {
+    public void irSecondWindows() throws IOException {
         //String mensaje=modelo.obtenerExcel(book);
         //labelMensaje.setText(mensaje);
 
@@ -116,7 +137,7 @@ public class HelloController {
         Hello2 controlador=fxmlLoader.getController();
        //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Hello2.fxml"));
         //Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        Scene scene=new Scene(root);
+        Scene scene=new Scene(root,400,380);
          Stage stage = new Stage();
         stage.setTitle("Hello2!");
         stage.setScene(scene);

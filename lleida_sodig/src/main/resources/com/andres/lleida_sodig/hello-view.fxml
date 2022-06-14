@@ -6,24 +6,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="349.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andres.lleida_sodig.HelloController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andres.lleida_sodig.HelloController">
    <children>
-      <HBox prefHeight="349.0" prefWidth="398.0">
+      <HBox prefHeight="349.0" prefWidth="255.0">
          <children>
             <VBox alignment="CENTER" prefHeight="343.0" prefWidth="239.0" spacing="20.0">
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                 </padding>
-               <GridPane prefHeight="263.0" prefWidth="193.0">
+               <GridPane prefHeight="259.0" prefWidth="199.0">
                  <columnConstraints>
                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                  </columnConstraints>
                  <rowConstraints>
-                     <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                     <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="54.0" valignment="CENTER" vgrow="SOMETIMES" />
                    <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
                    <RowConstraints maxHeight="57.33333333333333" minHeight="0.0" prefHeight="57.33333333333333" vgrow="SOMETIMES" />
-                     <RowConstraints maxHeight="50.33333333333334" minHeight="0.0" prefHeight="50.33333333333334" valignment="CENTER" vgrow="SOMETIMES" />
-                     <RowConstraints maxHeight="72.33333333333334" minHeight="0.0" prefHeight="30.333333333333343" valignment="CENTER" vgrow="SOMETIMES" />
                      <RowConstraints maxHeight="50.33333333333334" minHeight="0.0" prefHeight="50.33333333333334" valignment="CENTER" vgrow="SOMETIMES" />
                  </rowConstraints>
                   <children>
@@ -57,45 +55,11 @@
                            <Font name="Book Antiqua" size="12.0" />
                         </font>
                      </Button>
-                     <Button fx:id="btnConsultar" mnemonicParsing="false" onAction="#onConsultarClickButton" text="consultar datos" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                     <Button fx:id="btnExcel" mnemonicParsing="false" onAction="#onGenerarClickButton" prefHeight="17.0" prefWidth="87.0" text="generar excel" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                     <ImageView fx:id="imagen" fitHeight="52.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                     <ImageView fx:id="imagen" fitHeight="52.0" fitWidth="52.0" pickOnBounds="true" smooth="false" GridPane.halignment="CENTER" />
 
                   </children>
                </GridPane>
             </VBox>
-            <Pane prefHeight="171.0" prefWidth="172.0">
-               <children>
-                  <VBox layoutX="-9.0" prefHeight="349.0" prefWidth="521.0">
-                     <children>
-                        <DatePicker fx:id="dateFechaInicial" />
-                        <DatePicker fx:id="dateFechaFin" />
-                        <TableView fx:id="table" prefHeight="304.0" prefWidth="525.0">
-                          <columns>
-                            <TableColumn fx:id="Id" prefWidth="75.0" text="Id" />
-                            <TableColumn fx:id="Fecha_Lleida" prefWidth="75.0" text="Fecha Lleida" />
-                              <TableColumn fx:id="Fecha_Local" prefWidth="75.0" text="Fecha Local" />
-                              <TableColumn fx:id="Tipo" prefWidth="75.0" text="Tipo" />
-                              <TableColumn fx:id="Doc_OkKo" prefWidth="75.0" text="Doc_OkKo" />
-                              <TableColumn fx:id="Doc_UID" prefWidth="75.0" text="Doc_UID" />
-                              <TableColumn fx:id="Unidades_Certificadas" prefWidth="75.0" text="Unidades Certificadas" />
-                              <TableColumn fx:id="Dirección_Origen" prefWidth="75.0" text="Dirección Origen" />
-                              <TableColumn fx:id="Dirección_Destino" prefWidth="75.0" text="Dirección Destino" />
-                              <TableColumn fx:id="Dirección_Cc" prefWidth="75.0" text="Dirección Cc" />
-                              <TableColumn fx:id="Estado" prefWidth="75.0" text="Estado" />
-                              <TableColumn fx:id="Estado_Aux" prefWidth="75.0" text="Estado Aux" />
-                              <TableColumn fx:id="Asunto" prefWidth="75.0" text="Asunto" />
-                              <TableColumn fx:id="Doc_Visualizado" prefWidth="75.0" text="Doc_Visualizado" />
-                              <TableColumn fx:id="Fecha_Visualización" prefWidth="75.0" text="Fecha y hora de visualización" />
-                              <TableColumn fx:id="Add_UID" prefWidth="75.0" text="Add_UID" />
-
-
-                          </columns>
-                        </TableView>
-                     </children>
-                  </VBox>
-               </children>
-            </Pane>
          </children>
       </HBox>
       <Label fx:id="labelMensaje" text="Label" />

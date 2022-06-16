@@ -43,17 +43,17 @@ public class HelloController {
     public TableColumn<Correo,String> Doc_Visualizado;
     public TableColumn<Correo,String> Fecha_Visualización;
     public TableColumn<Correo,String> Add_UID;
-    public  Image img=new Image("E:\\classs\\IntelliJ IDEA\\LLEIDA\\lleida_sodig\\src\\main\\java\\com\\andres\\lleida_sodig\\folder_images_15503.png");
+    //public  Image img=new Image("E:\\classs\\IntelliJ IDEA\\LLEIDA\\lleida_sodig\\src\\main\\java\\com\\andres\\lleida_sodig\\folder_images_15503.png");
     //file:C:\Users\Andrés Aymacaña\Desktop\sodig.jpg
 
     public  ImageView imagen=new ImageView();
 
-    private HelloModel modelo=new HelloModel();
+
     public TextField txtUsuario;
     public TextField txtClave;
     public Button btnExcel;
+    private HelloModel modelo=new HelloModel();
 
-    static Workbook book = new XSSFWorkbook();
 
    /* public static void main(String[] args) {
         imagen.setFitHeight(100);
@@ -63,12 +63,12 @@ public class HelloController {
 
     }*/
 
-    @FXML
+    /*@FXML
     public void start() throws Exception {
         imagen.setFitHeight(100);
         imagen.setFitWidth(100);
         imagen.setImage(img);
-    }
+    }*/
 
 
     //ObservableList<Correo> list=FXCollections.observableArrayList();
@@ -103,7 +103,7 @@ public class HelloController {
     public void onConexionClickButton(ActionEvent actionEvent) throws IOException {
 imagen.setFitHeight(100);
 imagen.setFitWidth(100);
-imagen.setImage(img);
+//imagen.setImage(img);
       boolean condicion;
         String usuario=txtUsuario.getText();
         String clave=txtClave.getText();
@@ -118,6 +118,7 @@ imagen.setImage(img);
     }
 
     public void onConsultarClickButton(ActionEvent actionEvent) {
+        Workbook book = new XSSFWorkbook();
         String fechaInicial=null,fechaFinal=null;
         fechaInicial= dateFechaInicial.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         fechaFinal= dateFechaFin.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));

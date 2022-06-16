@@ -393,7 +393,7 @@ public class HelloModel {
 
                         list.add(p);
                         //seteo de variables
-                        mail_date=mail_date=unidades_certificadas=mail_type=fecha_Ecuador=file_doc_model=file_uid=mail_from=mail_to=gstatus=gstatus_aux=mail_subj=add_id=add_uid=add_displaydate="";
+                        mail_date=unidades_certificadas=mail_type=fecha_Ecuador=file_doc_model=file_uid=mail_from=mail_to=gstatus=gstatus_aux=mail_subj=add_id=add_uid=add_displaydate="";
                         //nueva fila
                         numeroCelda=0;
                     }

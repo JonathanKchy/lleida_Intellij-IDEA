@@ -62,9 +62,12 @@ public class Hello2 {
 
         //Correo p=new Correo("2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2");
         //list.add(p);
+
         table.setItems(list);
         table.setMaxSize(300,300);
         table.setMinSize(200,200);
+        int contadorCorreos=modelo.obtenerContador();
+        labellabel.setText("Hay "+contadorCorreos+" correos");
     }
 
     public void closeWindows() throws IOException {
@@ -82,9 +85,12 @@ public class Hello2 {
     }
 
     public void onConsultarClickButton(ActionEvent actionEvent) {
+        btnExcel.setDisable(false);
+        table.getItems().clear();
         String fechaInicial=null,fechaFinal=null;
         fechaInicial= dateFechaInicial.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         fechaFinal= dateFechaFin.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        book=null;
         book =modelo.reportePorFechas(fechaInicial,fechaFinal);
         //labelMensaje.setText(link);
 
@@ -93,6 +99,7 @@ public class Hello2 {
     }
 
     public void onGenerarClickButton(ActionEvent actionEvent) throws IOException {
+        btnExcel.setDisable(true);
         String mensaje=modelo.obtenerExcel(book);
         labellabel.setText(mensaje);
 

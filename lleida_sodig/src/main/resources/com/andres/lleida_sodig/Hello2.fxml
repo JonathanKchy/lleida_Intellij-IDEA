@@ -2,9 +2,9 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="339.0" prefWidth="407.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andres.lleida_sodig.Hello2">
-   <Label fx:id="labellabel" text="Label" />
    <HBox prefHeight="100.0" prefWidth="410.0">
       <children>
          <VBox prefHeight="100.0" prefWidth="283.0">
@@ -25,8 +25,13 @@
          </VBox>
          <VBox alignment="CENTER" prefHeight="100.0" prefWidth="195.0">
             <children>
-               <Button fx:id="btnConsultar" alignment="CENTER" mnemonicParsing="false" onAction="#onConsultarClickButton" text="Consultar Datos" />
-               <Button fx:id="btnExcel" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onGenerarClickButton" text="Generar Excel" />
+               <Label fx:id="labellabel" alignment="center" prefHeight="25.0" prefWidth="158.0">
+                  <font>
+                     <Font size="10.0" />
+                  </font>
+               </Label>
+               <Button fx:id="btnConsultar" alignment="CENTER" mnemonicParsing="false" onAction="#onConsultarClickButton" text="Consultar Datos" textFill="#2130d9" />
+               <Button fx:id="btnExcel" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onGenerarClickButton" text="Generar Excel" textFill="#0edb48" />
             </children>
          </VBox>
       </children>

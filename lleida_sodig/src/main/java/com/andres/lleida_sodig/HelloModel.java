@@ -23,8 +23,8 @@ public class HelloModel {
     static String mail_id, mail_date,fecha_Ecuador, mail_type, file_doc_model, file_uid, unidades_certificadas, mail_from, mail_to,direccion_CC="correo@certificado.lleida.net", gstatus, gstatus_aux, mail_subj, add_id, add_displaydate, add_uid;
     static String user,password,link="";
     static Workbook book = new XSSFWorkbook();
-
-    static ObservableList<Correo> list= FXCollections.observableArrayList();
+    public int contador=0;
+    public ObservableList<Correo> list= FXCollections.observableArrayList();
 //metodo enviar lista
 
     public ObservableList<Correo> enviarLista(){
@@ -76,7 +76,8 @@ public class HelloModel {
     public Workbook reportePorFechas(String fechaInicial,String fechaFinal){
     String fecha=null;
        link="https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user="+user+"&password="+password+"&mail_date_min="+fechaInicial+"070000&mail_date_max="+fechaFinal+"070000";
-       int contador = 0, numeroCelda = 0;
+       contador = 0;
+       int numeroCelda = 0;
 
         // Creamos el libro de trabajo de Excel formato OOXML
         book = new XSSFWorkbook();
@@ -449,5 +450,9 @@ public class HelloModel {
             Logger.getLogger(HelloModel.class.getName()).log(Level.SEVERE, null, ex);
         }
         return mensaje;
+    }
+
+    public int obtenerContador() {
+        return contador;
     }
 }

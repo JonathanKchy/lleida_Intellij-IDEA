@@ -106,6 +106,8 @@ public class HelloModel {
         //la fecha que nos entrega lleida a la fecha de Ecuador ya que el servidor de lleida está
         //adelantado en relación de  nosotros por 7 horas
         int dia_anterior = 1;
+        String[] newStr = null;
+        String correoAnterior = "";
 
         try {
 
@@ -302,6 +304,12 @@ public class HelloModel {
                         int tamano=linea.length();
                         int fin=tamano-10;
                         mail_to=linea.substring(9, fin);
+                        //obtengo el primer correo
+                        newStr = mail_to.split(" ",2);
+                        mail_to=newStr[0];
+                        if (mail_to.equals(correoAnterior)){
+                            mail_to="fotomultas-noreply@epmtsd.gob.ec";
+                        }
                         informationString.append("mail_to: "+mail_to);
                         informationString.append("\n");
                     }
@@ -391,6 +399,7 @@ public class HelloModel {
                         numeroCelda++;
                         row.createCell(numeroCelda).setCellValue(add_uid);
                         numeroCelda++;
+                        correoAnterior=mail_to;
 
                         list.add(p);
                         //seteo de variables

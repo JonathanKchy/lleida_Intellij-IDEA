@@ -37,6 +37,7 @@ public class Hello2 {
     public TableColumn<Correo,String> Doc_Visualizado;
     public TableColumn<Correo,String> Fecha_Visualización;
     public TableColumn<Correo,String> Add_UID;
+    public Button btnSofy;
 
     private HelloModel modelo=new HelloModel();
 
@@ -60,6 +61,24 @@ public class Hello2 {
         Fecha_Visualización.setCellValueFactory(new PropertyValueFactory<Correo,String>("Fecha_Visualización"));
         Add_UID.setCellValueFactory(new PropertyValueFactory<Correo,String>("Add_UID"));
 
+        //Correo p=new Correo("2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2");
+        //list.add(p);
+
+        table.setItems(list);
+        table.setMaxSize(300,300);
+        table.setMinSize(200,200);
+        int contadorCorreos=modelo.obtenerContador();
+        labellabel.setText("Hay "+contadorCorreos+" correos");
+    }
+
+    //cargar visualmete la lista de Sofy
+    public void CargarTablaSofy(ObservableList<Correo> list){
+        Fecha_Local.setCellValueFactory(new PropertyValueFactory<Correo,String>("Fecha_Local"));
+        Doc_OkKo.setCellValueFactory(new PropertyValueFactory<Correo,String>("Doc_OkKo"));
+        Dirección_Origen.setCellValueFactory(new PropertyValueFactory<Correo,String>("Dirección_Origen"));
+        Dirección_Destino.setCellValueFactory(new PropertyValueFactory<Correo,String>("Dirección_Destino"));
+        Doc_Visualizado.setCellValueFactory(new PropertyValueFactory<Correo,String>("Doc_Visualizado"));
+        //falta columna del SI
         //Correo p=new Correo("2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2");
         //list.add(p);
 
@@ -122,5 +141,19 @@ public class Hello2 {
         });
         Stage myStage=(Stage) this.labellabel.getScene().getWindow();
         myStage.close();*/
+    }
+
+    public void onConsultarClickButtonSofy(ActionEvent actionEvent) {
+        btnExcel.setDisable(false);
+        table.getItems().clear();
+        String fechaInicial=null,fechaFinal=null;
+        fechaInicial= dateFechaInicial.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        fechaFinal= dateFechaFin.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        book=null;
+        book =modelo.reportePorFechasSofy(fechaInicial,fechaFinal);
+        //labelMensaje.setText(link);
+
+        ObservableList<Correo> list=modelo.enviarLista();
+        CargarTablaSofy(list);
     }
 }

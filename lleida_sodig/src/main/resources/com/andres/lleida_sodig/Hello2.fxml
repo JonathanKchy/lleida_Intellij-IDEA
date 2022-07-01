@@ -31,6 +31,7 @@
                   </font>
                </Label>
                <Button fx:id="btnConsultar" alignment="CENTER" mnemonicParsing="false" onAction="#onConsultarClickButton" text="Consultar Datos" textFill="#2130d9" />
+               <Button fx:id="btnSofy" mnemonicParsing="false" onAction="#onConsultarClickButtonSofy" text="Consultar Sofy" />
                <Button fx:id="btnExcel" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onGenerarClickButton" text="Generar Excel" textFill="#0edb48" />
             </children>
          </VBox>

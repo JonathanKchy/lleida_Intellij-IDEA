@@ -28,7 +28,7 @@
                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                          <children>
                            <Label text="Usuario: " />
-                           <TextField fx:id="txtUsuario" alignment="CENTER" cache="true" prefHeight="25.0" prefWidth="122.0">
+                           <TextField fx:id="txtUsuario" alignment="CENTER" cache="true" prefHeight="25.0" prefWidth="122.0" text="sodigsa@ec">
                               <HBox.margin>
                                  <Insets left="20.0" />
                               </HBox.margin></TextField>
@@ -43,7 +43,7 @@
                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                         <children>
                            <Label text="Clave: " />
-                           <TextField fx:id="txtClave" alignment="CENTER" blendMode="DARKEN" prefHeight="25.0" prefWidth="110.0">
+                           <TextField fx:id="txtClave" alignment="CENTER" blendMode="DARKEN" prefHeight="25.0" prefWidth="110.0" text="TIiANcmymJ">
                               <HBox.margin>
                                  <Insets left="20.0" />
                               </HBox.margin></TextField>

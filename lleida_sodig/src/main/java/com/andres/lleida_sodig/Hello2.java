@@ -41,7 +41,7 @@ public class Hello2 {
 
     private HelloModel modelo=new HelloModel();
 
-    static Workbook book = new XSSFWorkbook();
+    public Workbook book = new XSSFWorkbook();
 
     public void CargarTabla(ObservableList<Correo> list){
         Id.setCellValueFactory(new PropertyValueFactory<Correo,String>("Id"));
@@ -102,14 +102,28 @@ public class Hello2 {
         Stage myStage=(Stage) this.labellabel.getScene().getWindow();
         myStage.close();
     }
+    public void onConsultarClickButtonSofy(ActionEvent actionEvent) {
+        btnExcel.setDisable(false);
+        table.getItems().clear();
+        String fechaInicial=null,fechaFinal=null;
+        fechaInicial= dateFechaInicial.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        fechaFinal= dateFechaFin.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        System.out.println(fechaInicial);
+        System.out.println(fechaFinal);
+        book=null;
+        book =modelo.reportePorFechasSofy(fechaInicial,fechaFinal);
+        //labelMensaje.setText(link);
 
+        ObservableList<Correo> list=modelo.enviarLista();
+        CargarTablaSofy(list);
+    }
     public void onConsultarClickButton(ActionEvent actionEvent) {
         btnExcel.setDisable(false);
         table.getItems().clear();
         String fechaInicial=null,fechaFinal=null;
         fechaInicial= dateFechaInicial.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         fechaFinal= dateFechaFin.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        book=null;
+        //book=null;
         book =modelo.reportePorFechas(fechaInicial,fechaFinal);
         //labelMensaje.setText(link);
 
@@ -143,17 +157,5 @@ public class Hello2 {
         myStage.close();*/
     }
 
-    public void onConsultarClickButtonSofy(ActionEvent actionEvent) {
-        btnExcel.setDisable(false);
-        table.getItems().clear();
-        String fechaInicial=null,fechaFinal=null;
-        fechaInicial= dateFechaInicial.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        fechaFinal= dateFechaFin.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        book=null;
-        book =modelo.reportePorFechasSofy(fechaInicial,fechaFinal);
-        //labelMensaje.setText(link);
 
-        ObservableList<Correo> list=modelo.enviarLista();
-        CargarTablaSofy(list);
-    }
 }

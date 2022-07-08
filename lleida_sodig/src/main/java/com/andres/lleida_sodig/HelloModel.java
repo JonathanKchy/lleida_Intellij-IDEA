@@ -116,7 +116,7 @@ public class HelloModel {
             HttpsURLConnection conn=(HttpsURLConnection)url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
-
+            System.out.println(link);
             int responseCod= conn.getResponseCode();
             if (responseCod!=200) {
                 throw new RuntimeException("ocurrio un error: "+responseCod);
@@ -472,7 +472,7 @@ public class HelloModel {
         link="https://tsa.lleida.net/cgi-bin/mailcertapi.cgi?action=list_pdf&user="+user+"&password="+password+"&mail_date_min="+fechaInicial+"070000&mail_date_max="+fechaFinal+"070000";
         contador = 0;
         int numeroCelda = 0;
-
+        book=null;
         // Creamos el libro de trabajo de Excel formato OOXML
         book = new XSSFWorkbook();
         // La hoja donde pondremos los datos
@@ -513,6 +513,7 @@ public class HelloModel {
             if (responseCod!=200) {
                 throw new RuntimeException("ocurrio un error: "+responseCod);
             }else  {
+                add_id="";
                 StringBuilder informationString=new StringBuilder();
                 Scanner scanner=new Scanner(url.openStream());
                 while (scanner.hasNext()) {
@@ -754,9 +755,10 @@ public class HelloModel {
                         informationString.append("\n");
                     }
                     else if(linea.contains("</pdf_row>")) {
+
                         Correo p=new Correo(mail_id,mail_date,fecha_Ecuador,mail_type,file_doc_model,file_uid,unidades_certificadas,mail_from,mail_to,direccion_CC,gstatus,gstatus_aux,mail_subj,add_id,add_displaydate,add_uid);
 
-                        informationString.append("\n");
+
                         contador++;
                         row=sheet.createRow(contador);
 
@@ -775,16 +777,17 @@ public class HelloModel {
                         }
                         row.createCell(numeroCelda).setCellValue(file_doc_model);
                         numeroCelda++;
-                        if (add_id.equals("Displayed")){
-                            add_id="SI";
-                        }else {
+                        if (add_id.equals("")){
                             add_id="NO";
+                        }else {
+                            add_id="SI";
                         }
+                        System.out.println(add_id);
+
                         row.createCell(numeroCelda).setCellValue(add_id);
 
                         numeroCelda++;
                         correoAnterior=mail_to;
-
                         list.add(p);
                         //seteo de variables
                         mail_date=unidades_certificadas=mail_type=fecha_Ecuador=file_doc_model=file_uid=mail_from=mail_to=gstatus=gstatus_aux=mail_subj=add_id=add_uid=add_displaydate="";

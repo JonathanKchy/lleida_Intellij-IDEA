@@ -768,8 +768,18 @@ public class HelloModel {
                         numeroCelda++;
                         row.createCell(numeroCelda).setCellValue("SI");
                         numeroCelda++;
+                        if(file_doc_model.equals("KO")){
+                            file_doc_model="NO";
+                        }else {
+                            file_doc_model="YES";
+                        }
                         row.createCell(numeroCelda).setCellValue(file_doc_model);
                         numeroCelda++;
+                        if (add_id.equals("Displayed")){
+                            add_id="SI";
+                        }else {
+                            add_id="NO";
+                        }
                         row.createCell(numeroCelda).setCellValue(add_id);
 
                         numeroCelda++;

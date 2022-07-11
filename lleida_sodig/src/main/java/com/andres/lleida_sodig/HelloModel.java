@@ -796,6 +796,31 @@ public class HelloModel {
                     }
 
                 }
+                contador++;
+                row=sheet.createRow(contador);
+                row.createCell(0).setCellValue("Por SODIG S.A.: ");
+                contador=contador+5;
+                row=sheet.createRow(contador);
+                row.createCell(0).setCellValue("Generado por:");
+                row.createCell(1).setCellValue("Sofía Soria");
+                row.createCell(2).setCellValue("Revisado por: Marco Logacho ");
+                row.createCell(4).setCellValue("Aprobado por: Ivan Robalino");
+                contador++;
+                row=sheet.createRow(contador);
+                row.createCell(3).setCellValue("Aprobó por el cliente:");
+                contador=contador+2;
+                row=sheet.createRow(contador);
+                row.createCell(3).setCellValue("Ing. Nataly Correa Vallejo");
+                contador++;
+                row=sheet.createRow(contador);
+                row.createCell(3).setCellValue("Procurador Común");
+                contador++;
+                row=sheet.createRow(contador);
+                row.createCell(3).setCellValue("Procurador Común");
+                contador++;
+                row=sheet.createRow(contador);
+                row.createCell(3).setCellValue("CONSORCIO VIAL SD");
+
                 scanner.close();
                 //System.out.println(informationString);
                 System.out.println(contador);

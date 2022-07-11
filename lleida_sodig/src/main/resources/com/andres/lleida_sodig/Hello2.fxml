@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="339.0" prefWidth="407.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andres.lleida_sodig.Hello2">
+<AnchorPane prefHeight="372.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.andres.lleida_sodig.Hello2">
    <HBox prefHeight="100.0" prefWidth="410.0">
       <children>
          <VBox prefHeight="100.0" prefWidth="283.0">
@@ -32,12 +32,13 @@
                </Label>
                <Button fx:id="btnConsultar" alignment="CENTER" mnemonicParsing="false" onAction="#onConsultarClickButton" text="Consultar Datos" textFill="#2130d9" />
                <Button fx:id="btnSofy" mnemonicParsing="false" onAction="#onConsultarClickButtonSofy" text="Consultar Sofy" />
+               <Button mnemonicParsing="false" text="Consultar Marco" textFill="#ff4800" />
                <Button fx:id="btnExcel" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onGenerarClickButton" text="Generar Excel" textFill="#0edb48" />
             </children>
          </VBox>
       </children>
    </HBox>
-   <TableView fx:id="table" layoutX="8.0" layoutY="100.0" prefHeight="200.0" prefWidth="339.0">
+   <TableView fx:id="table" layoutX="38.0" layoutY="126.0" prefHeight="222.0" prefWidth="330.0">
       <columns>
          <TableColumn fx:id="Id" prefWidth="75.0" text="Id" />
          <TableColumn fx:id="Fecha_Lleida" prefWidth="75.0" text="Fecha Lleida" />

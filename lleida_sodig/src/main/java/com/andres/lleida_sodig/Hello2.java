@@ -12,7 +12,9 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 public class Hello2 {
     public Label labellabel;
@@ -38,6 +40,7 @@ public class Hello2 {
     public TableColumn<Correo,String> Fecha_Visualización;
     public TableColumn<Correo,String> Add_UID;
     public Button btnSofy;
+    public Button btnMarco;
 
     private HelloModel modelo=new HelloModel();
 
@@ -158,4 +161,32 @@ public class Hello2 {
     }
 
 
+    public void onConsultarClickButtonMarco(ActionEvent actionEvent) {
+        btnExcel.setDisable(false);
+        table.getItems().clear();
+        String fechaInicial=null,fechaFinal=null;
+        fechaInicial= dateFechaInicial.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        LocalDate fechaFinDate= dateFechaFin.getValue();
+        fechaFinDate=fechaFinDate.plusDays(1);
+        String mes="",dia="";
+        if (fechaFinDate.getMonthValue()<10){
+             mes="0"+String.valueOf(fechaFinDate.getMonthValue());
+        }else {
+            mes= String.valueOf(fechaFinDate.getMonthValue());
+        }
+        if (fechaFinDate.getDayOfMonth()<10){
+            dia="0"+String.valueOf(fechaFinDate.getDayOfMonth());
+        }else {
+            dia= String.valueOf(fechaFinDate.getDayOfMonth());
+        }
+        fechaFinal= fechaFinDate.getYear()+mes+dia;
+        System.out.println(fechaInicial);
+        System.out.println(fechaFinal);
+        book=null;
+        book =modelo.reportePorFechasMarco(fechaInicial,fechaFinal);
+        //labelMensaje.setText(link);
+
+        ObservableList<Correo> list=modelo.enviarLista();
+        CargarTablaSofy(list);
+    }
 }

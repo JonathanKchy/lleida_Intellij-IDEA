@@ -486,6 +486,7 @@ public class HelloModel {
         Row row = sheet.createRow(contador);
         //row.createCell(1).setCellValue("Reporte mes año");
         /////
+        /*
         XSSFCell cell1= (XSSFCell) row.createCell(1);
         XSSFCellStyle headerStyle = (XSSFCellStyle) book.createCellStyle();
         Font headerFont = book.createFont();
@@ -493,7 +494,21 @@ public class HelloModel {
         headerStyle.setFont(headerFont);
         cell1.setCellStyle(headerStyle);
         cell1.setCellValue("REPORTE "+fechaInicial.substring(6,8));
-        ////
+        */
+        ///creo estilo
+
+        CellStyle style = book.createCellStyle();
+        style.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+        Font font = book.createFont();
+        font.setUnderline(Font.SYMBOL_CHARSET);
+        font.setColor(IndexedColors.BLUE.getIndex());
+        font.setBold(true);//Seteando fuente negrita al encabezado del archivo excel
+        style.setFont(font);
+
+        XSSFCell cell1= (XSSFCell) row.createCell(1);
+        cell1.setCellStyle(style);
+        cell1.setCellValue("REPORTE "+fechaInicial.substring(6,8));
+        //
         contador++;
         row = sheet.createRow(contador);
         row.createCell(1).setCellValue("Detalle de correos certificados");

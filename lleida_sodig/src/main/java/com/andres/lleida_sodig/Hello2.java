@@ -110,7 +110,20 @@ public class Hello2 {
         table.getItems().clear();
         String fechaInicial=null,fechaFinal=null;
         fechaInicial= dateFechaInicial.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        fechaFinal= dateFechaFin.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        LocalDate fechaFinDate= dateFechaFin.getValue();
+        fechaFinDate=fechaFinDate.plusDays(1);
+        String mes="",dia="";
+        if (fechaFinDate.getMonthValue()<10){
+            mes="0"+String.valueOf(fechaFinDate.getMonthValue());
+        }else {
+            mes= String.valueOf(fechaFinDate.getMonthValue());
+        }
+        if (fechaFinDate.getDayOfMonth()<10){
+            dia="0"+String.valueOf(fechaFinDate.getDayOfMonth());
+        }else {
+            dia= String.valueOf(fechaFinDate.getDayOfMonth());
+        }
+        fechaFinal= fechaFinDate.getYear()+mes+dia;
         System.out.println(fechaInicial);
         System.out.println(fechaFinal);
         book=null;
@@ -125,8 +138,23 @@ public class Hello2 {
         table.getItems().clear();
         String fechaInicial=null,fechaFinal=null;
         fechaInicial= dateFechaInicial.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        fechaFinal= dateFechaFin.getValue().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        //book=null;
+        LocalDate fechaFinDate= dateFechaFin.getValue();
+        fechaFinDate=fechaFinDate.plusDays(1);
+        String mes="",dia="";
+        if (fechaFinDate.getMonthValue()<10){
+            mes="0"+String.valueOf(fechaFinDate.getMonthValue());
+        }else {
+            mes= String.valueOf(fechaFinDate.getMonthValue());
+        }
+        if (fechaFinDate.getDayOfMonth()<10){
+            dia="0"+String.valueOf(fechaFinDate.getDayOfMonth());
+        }else {
+            dia= String.valueOf(fechaFinDate.getDayOfMonth());
+        }
+        fechaFinal= fechaFinDate.getYear()+mes+dia;
+        System.out.println(fechaInicial);
+        System.out.println(fechaFinal);
+        book=null;
         book =modelo.reportePorFechas(fechaInicial,fechaFinal);
         //labelMensaje.setText(link);
 

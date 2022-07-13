@@ -3,8 +3,10 @@ package com.andres.lleida_sodig;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.*;
 import org.openxmlformats.schemas.drawingml.x2006.chart.CTRotY;
+import org.openxmlformats.schemas.drawingml.x2006.main.CTBlurEffect;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.FileNotFoundException;
@@ -475,16 +477,27 @@ public class HelloModel {
         book=null;
         // Creamos el libro de trabajo de Excel formato OOXML
         book = new XSSFWorkbook();
+
+
+
         // La hoja donde pondremos los datos
         Sheet sheet = book.createSheet("Detalle de Reporte");
         //creamos una fila
         Row row = sheet.createRow(contador);
-        row.createCell(1).setCellValue("Reporte mes año");
+        //row.createCell(1).setCellValue("Reporte mes año");
+        /////
+        XSSFCell cell1= (XSSFCell) row.createCell(1);
+        XSSFCellStyle headerStyle = (XSSFCellStyle) book.createCellStyle();
+        Font headerFont = book.createFont();
+        headerFont.setColor(IndexedColors.BLUE.getIndex());
+        headerStyle.setFont(headerFont);
+        cell1.setCellStyle(headerStyle);
+        cell1.setCellValue("REPORTE "+fechaInicial.substring(6,8));
+        ////
         contador++;
         row = sheet.createRow(contador);
         row.createCell(1).setCellValue("Detalle de correos certificados");
         contador++;
-
         row = sheet.createRow(contador);
         //numeroCelda++;
         row.createCell(0).setCellValue("Fecha");

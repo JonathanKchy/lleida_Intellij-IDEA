@@ -498,11 +498,14 @@ public class HelloModel {
         ///creo estilo
 
         CellStyle style = book.createCellStyle();
-        style.setFillForegroundColor(IndexedColors.GREEN.getIndex());
         Font font = book.createFont();
         font.setUnderline(Font.SYMBOL_CHARSET);
         font.setColor(IndexedColors.BLUE.getIndex());
         font.setBold(true);//Seteando fuente negrita al encabezado del archivo excel
+        //font.setFontHeightInPoints((short) 14);//tamaño de letra
+        //font.setItalic(true);//cursiva
+        //font.setStrikeout(true);//tachado
+        style.setFillForegroundColor((short)100);
         style.setFont(font);
 
         XSSFCell cell1= (XSSFCell) row.createCell(1);
@@ -515,12 +518,24 @@ public class HelloModel {
         contador++;
         row = sheet.createRow(contador);
         //numeroCelda++;
-        row.createCell(0).setCellValue("Fecha");
-        row.createCell(1).setCellValue("Correo Remitente");
-        row.createCell(2).setCellValue("Correo Destinatario");
-        row.createCell(3).setCellValue("Correo Certificado");
-        row.createCell(4).setCellValue("Correo Recibido");
-        row.createCell(5).setCellValue("Correo Leido");
+        cell1= (XSSFCell) row.createCell(0);
+        cell1.setCellStyle(style);
+        cell1.setCellValue("Fecha");
+        cell1= (XSSFCell) row.createCell(1);
+        cell1.setCellStyle(style);
+        cell1.setCellValue("Correo Remitente");
+        cell1= (XSSFCell) row.createCell(2);
+        cell1.setCellStyle(style);
+        cell1.setCellValue("Correo Destinatario");
+        cell1= (XSSFCell) row.createCell(3);
+        cell1.setCellStyle(style);
+        cell1.setCellValue("Correo Certificado");
+        cell1= (XSSFCell) row.createCell(4);
+        cell1.setCellStyle(style);
+        cell1.setCellValue("Correo Recibido");
+        cell1= (XSSFCell) row.createCell(5);
+        cell1.setCellStyle(style);
+        cell1.setCellValue("Correo Leido");
 
 
         //esta variable servirá para almacenar el número del día anterior, sirve para poder cambiar
